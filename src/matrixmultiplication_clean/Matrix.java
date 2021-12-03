@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package matrixmultiplication;
+package matrixmultiplication_clean;
 import java.util.Random;
 /**
  *
@@ -66,7 +66,23 @@ public class Matrix {
    
     //Multiply a rows by a col and store the result in the given position
    void doRowsProduct(Matrix b, Matrix result, int fromRow, int toRow){
-       //TODO implement me 
+       
+       int numberOfRows= this.getNumberOfRows();
+       int numberOfCols = this.getNumberOfCols();
+       result= new Matrix(numberOfRows);
+       
+       for(int row=fromRow; row< toRow; row++){
+           for( int col=0;col< numberOfCols; col++)
+           {
+                int val=0;
+                for(int i=0;i< numberOfCols;i++){
+                    val = val+ this.getElement(i,i)* b.getElement(i, i);
+                }
+                result.setElement(row, col, val);
+           }
+       }
+       
+        
    }
    
    
@@ -93,7 +109,7 @@ public class Matrix {
       
        
    }
-   
+    
     @Override
    public String toString(){
         int numberOfRows= this.getNumberOfRows();
