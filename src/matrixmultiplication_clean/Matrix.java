@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package matrixmultiplication_clean;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 /**
  *
@@ -29,7 +35,23 @@ public class Matrix {
    
     
    Matrix(String filename){
-      //load matrix from file 
+      //load matrix from file
+      try{
+      File file = new File(filename);
+      FileInputStream fIn = new FileInputStream(file);
+      DataInputStream out = new DataInputStream(fIn);
+      for(int i=0; i < this.values.length; i++){
+          for(int j=0;j<this.values.length;j++){
+              this.values[i][j] = out.readInt();
+          }
+      }      
+      }catch(FileNotFoundException e){
+          System.out.print(e);
+      }
+      catch(IOException e){
+          System.out.print(e);
+      }
+      
       //TODO implement me
    }
    
