@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 /**
@@ -51,12 +52,34 @@ public class Matrix {
       catch(IOException e){
           System.out.print(e);
       }
+      catch(Exception e){
+           System.out.print(e);
+      }
       
       //TODO implement me
    }
    
    void saveMatrixToFile(String filename){
        //TODO implment me
+      try{
+      File file = new File(filename);
+      FileOutputStream fIn = new FileOutputStream(file);
+      DataOutputStream out = new DataOutputStream(fIn);
+      for(int i=0; i < this.values.length; i++){
+          for(int j=0;j<this.values.length;j++){
+              out.writeInt(this.values[i][j]);
+          }
+      }      
+      }catch(FileNotFoundException e){
+          System.out.print(e);
+      }
+      catch(IOException e){
+          System.out.print(e);
+      }
+      catch(Exception e){
+           System.out.print(e);
+      }
+      
    }
    
    int getElement(int i, int j){
