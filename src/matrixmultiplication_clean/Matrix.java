@@ -38,14 +38,15 @@ public class Matrix {
    Matrix(String filename){
       //load matrix from file
       try{
-      File file = new File(filename);
-      FileInputStream fIn = new FileInputStream(file);
+      FileInputStream fIn = new FileInputStream(filename);
       DataInputStream out = new DataInputStream(fIn);
       for(int i=0; i < this.values.length; i++){
           for(int j=0;j<this.values.length;j++){
               this.values[i][j] = out.readInt();
           }
-      }      
+      }
+      fIn.close();
+      out.close();
       }catch(FileNotFoundException e){
           System.out.print(e);
       }
@@ -62,14 +63,15 @@ public class Matrix {
    void saveMatrixToFile(String filename){
        //TODO implment me
       try{
-      File file = new File(filename);
-      FileOutputStream fIn = new FileOutputStream(file);
+      FileOutputStream fIn = new FileOutputStream(filename);
       DataOutputStream out = new DataOutputStream(fIn);
       for(int i=0; i < this.values.length; i++){
           for(int j=0;j<this.values.length;j++){
               out.writeInt(this.values[i][j]);
           }
       }      
+      fIn.close();
+      out.close();
       }catch(FileNotFoundException e){
           System.out.print(e);
       }

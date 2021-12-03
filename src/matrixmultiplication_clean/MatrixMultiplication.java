@@ -20,10 +20,10 @@ public class MatrixMultiplication {
          
          int N= 1024;
          int threads= 8;
-         
+                  
           long start = System.nanoTime();
          
-         //Todo parallel mult 
+           implementThreadedMultTest(N,threads );
            long end = System.nanoTime();
         System.out.println("ParALLEL Execution time: "+ (end -start)*10e-9);
         
@@ -33,7 +33,7 @@ public class MatrixMultiplication {
        
         start = System.nanoTime();
         Matrix r = matrixA.sequentialMul(matrixB);
-         end = System.nanoTime();
+        end = System.nanoTime();
         System.out.println("Execution time Sequential: "+ (end -start)*10e-9);
         
    
@@ -43,8 +43,20 @@ public class MatrixMultiplication {
     
     public static void implementThreadedMultTest(int N, int threads ){
         
-   
-             
+        threadMultipliers[] threadM = new threadMultipliers[threads];
+        int From=0;
+        int To = N/threads;
+        
+        for(int i=0; i < threads; i++){
+            threadM[i] = new threadMultipliers(From, To);
+            From = To;
+            To = To+To;
+            if(To > N){
+              To = N;
+            }
+            threadM[i].run();
+        }
+        
             //System.out.println(result);
             
       
