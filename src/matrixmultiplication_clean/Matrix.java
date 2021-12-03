@@ -88,7 +88,19 @@ public class Matrix {
    
    //Multiply a row by a col and store the result in the given position
    void doDotProduct(Matrix b, Matrix result, int row){
-       //TODO implement me 
+       //TODO implement me
+       int numberOfRows= this.getNumberOfRows();
+       int numberOfCols = this.getNumberOfCols();
+       
+       
+       for(int i=0; i< numberOfRows; i++){
+           for( int j=0;j< numberOfCols; j++)
+           {
+                int val=0;
+                val = val+ this.getElement(row,j)* b.getElement(j, row);
+                result.setElement(row, j, val);
+           }
+       }
    }
    
    
