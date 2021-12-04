@@ -22,10 +22,20 @@ public class threadMultipliers implements Runnable{
        this.FromRow = FromRow;
        this.ToRow = ToRow;
     }
+    
+    public void setMatrixA(Matrix A){
+        this.matrixA = A;
+    }
+    
+    public void setMatrixB(Matrix B){
+        this.matrixB = B;
+    }
+    
 
     @Override
     public void run() {
-        
+        this.result = new Matrix(matrixA.getValues().length);
+        this.matrixA.doRowsProduct(matrixB, result, FromRow, ToRow);
     }
     
 }

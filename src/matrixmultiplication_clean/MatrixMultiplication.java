@@ -43,12 +43,17 @@ public class MatrixMultiplication {
     
     public static void implementThreadedMultTest(int N, int threads ){
         
+       Matrix matrixA= Matrix.generateRandomSquareMatrix(N, 2);
+       Matrix matrixB= Matrix.generateRandomSquareMatrix(N, 2);
+        
         threadMultipliers[] threadM = new threadMultipliers[threads];
         int From=0;
         int To = N/threads;
         
         for(int i=0; i < threads; i++){
             threadM[i] = new threadMultipliers(From, To);
+            threadM[i].setMatrixA(matrixA);
+            threadM[i].setMatrixB(matrixB);
             From = To;
             To = To+To;
             if(To > N){
