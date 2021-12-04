@@ -20,16 +20,18 @@ public class MatrixMultiplication {
          
          int N= 1024;
          int threads= 8;
-                  
+    
+         Matrix matrixA= Matrix.generateRandomSquareMatrix(N, 2);
+         Matrix matrixB= Matrix.generateRandomSquareMatrix(N, 2);
+         
           long start = System.nanoTime();
          
-           implementThreadedMultTest(N,threads );
+           implementThreadedMultTest(N,threads,matrixA,matrixB );
            long end = System.nanoTime();
         System.out.println("ParALLEL Execution time: "+ (end -start)*10e-9);
         
         
-       Matrix matrixA= Matrix.generateRandomSquareMatrix(N, 2);
-       Matrix matrixB= Matrix.generateRandomSquareMatrix(N, 2);
+      
        
         start = System.nanoTime();
         Matrix r = matrixA.sequentialMul(matrixB);
@@ -41,29 +43,32 @@ public class MatrixMultiplication {
         
     }
     
-    public static void implementThreadedMultTest(int N, int threads ){
-        
-       Matrix matrixA= Matrix.generateRandomSquareMatrix(N, 2);
-       Matrix matrixB= Matrix.generateRandomSquareMatrix(N, 2);
+    public static void implementThreadedMultTest(int N, int threads,Matrix matrixA, Matrix matrixB ){
         
         threadMultipliers[] threadM = new threadMultipliers[threads];
         int From=0;
         int To = N/threads;
         
         for(int i=0; i < threads; i++){
-            threadM[i] = new threadMultipliers(From, To);
+            threadM[i] = new threadMultipliers(From, To,i);
             threadM[i].setMatrixA(matrixA);
             threadM[i].setMatrixB(matrixB);
-            From = To;
+            From = To+1;
             To = To+To;
             if(To > N){
               To = N;
             }
-            threadM[i].run();
+            threadM[i].start();
         }
         
-            //System.out.println(result);
-            
+        try{
+            for(int i=0;i<threads;i++){
+            threadM[i].join();
+            }
+        }catch(InterruptedException e){
+            System.out.println(e);
+        }
+            //System.out.println(result);  
       
         
     }

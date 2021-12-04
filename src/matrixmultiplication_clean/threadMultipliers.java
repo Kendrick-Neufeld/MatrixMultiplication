@@ -9,18 +9,20 @@ package matrixmultiplication_clean;
  *
  * @author Usuario
  */
-public class threadMultipliers implements Runnable{
+public class threadMultipliers extends Thread{
     
     private int FromRow;
     private int ToRow;
     Matrix matrixA;
     Matrix matrixB;
     Matrix result;
+    int mynum;
     
-    
-    public threadMultipliers(int FromRow, int ToRow) {
+    public threadMultipliers(int FromRow, int ToRow, int mynum) {
        this.FromRow = FromRow;
        this.ToRow = ToRow;
+       this.mynum = mynum;
+       
     }
     
     public void setMatrixA(Matrix A){
