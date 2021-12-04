@@ -25,6 +25,14 @@ public class threadMultipliers extends Thread{
        
     }
     
+    public int getFromRow(){
+        return this.FromRow;
+    }
+    
+    public int getToRow(){
+        return this.ToRow;
+    }
+    
     public void setMatrixA(Matrix A){
         this.matrixA = A;
     }
@@ -33,6 +41,13 @@ public class threadMultipliers extends Thread{
         this.matrixB = B;
     }
     
+    public Matrix getresult(){
+        return this.result;
+    }
+    
+    public void setresult(Matrix result){
+        this.result = result;
+    }
 
     @Override
     public void run() {

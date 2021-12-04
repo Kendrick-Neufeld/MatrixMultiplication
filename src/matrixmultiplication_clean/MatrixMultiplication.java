@@ -54,7 +54,7 @@ public class MatrixMultiplication {
             threadM[i].setMatrixA(matrixA);
             threadM[i].setMatrixB(matrixB);
             From = To+1;
-            To = To+To;
+            To = To+To+1;
             if(To > N){
               To = N;
             }
